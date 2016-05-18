@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editable</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-table/css/bootstrap-table.min.css">
+    <!--<link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">-->
+    <link href="x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="../assets/examples.css">-->
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap-table/js/bootstrap-table.min.js"></script>
+    <script src="bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
+    <script src="x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <!--<script src="../ga.js"></script>-->
+</head>
+<body>
+    <div class="container">
+        <h1>Editable</h1>
+        <table id="table"
+               data-toggle="table"
+               data-pagination="true"
+               data-show-export="true"
+               data-url="data_page_client.json">
+            <thead>
+                <tr>
+                    <th data-field="Id">ID</th>
+                    <th data-field="Code" data-editable="true">编号</th>
+                    <th data-field="Name">姓名</th>
+                    <th data-field="Gender" data-editable="true">性别</th>
+                    <th data-field="Age" data-editable="true">年龄</th>
+                    <th data-field="Birthday">生日</th>
+                    <th data-field="Salary" data-editable="true">薪资</th>
+                    <th data-field="Org" data-editable="true">组织id</th>
+                    <th data-field="OrgName" data-editable="true">组织名称</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>
