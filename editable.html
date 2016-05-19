@@ -1,42 +1,135 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Editable</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
+    <title>editable</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-table/css/bootstrap-table.min.css">
-    <!--<link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">-->
-    <link href="x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-    <!--<link rel="stylesheet" href="../assets/examples.css">-->
+    <link href="x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+    <link href="bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap-table/js/bootstrap-table.min.js"></script>
     <script src="bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
-    <script src="x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-    <!--<script src="../ga.js"></script>-->
+    <script src="x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+    <script src="bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <!--put your locale files after bootstrap-table.js-->
+    <script src="bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <style>
+        .edit:hover {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(function () {
+            $.fn.editable.defaults.mode = 'popup';//popup,inline
+            $('#username').editable({
+                    disabled:false,
+                    type:'text',
+                    placement:"right",
+                    placeholder:'请输入姓名',
+                    clear:true
+                }
+            );
+            $('#about').editable({
+                    disabled:false,
+                    type:'textarea',
+                    placement:"right",
+                    placeholder:'用户简介',
+                    clear:true
+                }
+            );
+            $('#gender').editable({
+                    disabled:false,
+                    type:'select',
+                    placement:"right",
+                    placeholder:'性别',
+                    value:0,
+                    source:[
+                        {value:1,text:'男'},
+                        {value:0,text:'女'}
+                    ]
+                }
+            );
+            $('#birthday').editable({
+                    disabled:false,
+                    type:'date',
+                    datepicker: {
+                        weekStart: 1
+                    },
+                    placement:"right",
+                    placeholder:'出生日期',
+                    clear:false,
+                    format:'yyyy-mm-dd'
+                }
+            );
+            $('#birthday').editable({
+                    disabled:false,
+                    type:'date',
+                    datepicker: {
+                        weekStart: 1
+                    },
+                    placement:"right",
+                    placeholder:'出生日期',
+                    clear:false,
+                    format:'yyyy-mm-dd'
+                }
+            );
+            $('#worktime').editable({
+                    disabled:false,
+                    type:'datetime',
+                    datepicker: {
+                        weekStart: 1
+                    },
+                    placement:"right",
+                    placeholder:'上班时间',
+                    clear:false,
+                    format:'yyyy-mm-dd hh:ii'
+                }
+            );
+        });
+    </script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Editable</h1>
-        <table id="table"
-               data-toggle="table"
-               data-pagination="true"
-               data-show-export="true"
-               data-url="data_page_client.json">
-            <thead>
-                <tr>
-                    <th data-field="Id">ID</th>
-                    <th data-field="Code" data-editable="true">编号</th>
-                    <th data-field="Name">姓名</th>
-                    <th data-field="Gender" data-editable="true">性别</th>
-                    <th data-field="Age" data-editable="true">年龄</th>
-                    <th data-field="Birthday">生日</th>
-                    <th data-field="Salary" data-editable="true">薪资</th>
-                    <th data-field="Org" data-editable="true">组织id</th>
-                    <th data-field="OrgName" data-editable="true">组织名称</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="container" style="margin-top:200px;">
+        <div>
+            1、text：
+            <br>
+            <span>用户名:</span>
+            <span class="edit" id="username"></span>
+        </div>
+        <div>
+            2、textarea：
+            <br>
+            <span>简介:</span>
+            <span id="about" class="edit"></span>
+        </div>
+        <div>
+            3、select：
+            <br>
+            <span>性别:</span>
+            <span id="gender" class="edit"></span>
+        </div>
+        <div>
+            4、date：
+            <br>
+            <span>出生日期:</span>
+            <span id="birthday" class="edit">1989-12-22</span>
+        </div>
+        <div>
+            5、datetime：
+            <br>
+            <span>上班时间:</span>
+            <span id="worktime" class="edit"></span>
+        </div>
     </div>
+
 </body>
+
 </html>

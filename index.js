@@ -1,6 +1,6 @@
 var index = {
     grid: $('#grid'),
-    initGrid: function () {
+    initGrid: function() {
         index.grid.bootstrapTable({
             url: 'http://localhost/aspnet/Employees/Handlers/GetAll.ashx',
             //url: 'data_page_client.json',
@@ -16,7 +16,7 @@ var index = {
             pageSize: 10,
             pageList: [10, 25, 50, 100],
             queryParamsType: 'page',
-            queryParams: function (params) {
+            queryParams: function(params) {
                 //获取查询条件
                 //$('#j_serach').getSearchParams(params);
                 return params;
@@ -26,7 +26,7 @@ var index = {
             //contentType: 'text/plain',
             dataType: 'json',
             height: 700,
-            rowStyle: function (value, row, index) {
+            rowStyle: function(value, row, index) {
                 return {
                     //classes: 'text-nowrap another-class',
                     css: { "vertical-align": "middle", "max-height": "40" }
@@ -37,8 +37,10 @@ var index = {
                 { field: 'Id', title: '雇员ID', align: 'center' },
                 { field: 'Code', title: '编号', align: 'center' },
                 {
-                    field: 'Name', title: '姓名', align: 'center', editable: true, width: 100,
-                    rowStyle: function (value, row, index) {
+                    field: 'Name', title: '姓名', align: 'center', 
+                    editable:true, 
+                    width: 100,
+                    rowStyle: function(value, row, index) {
                         return {
                             css: { 'overflow': 'hidden', 'white-space': 'nowrap', 'text-overflow': 'ellipsis' }
                         };
@@ -46,18 +48,31 @@ var index = {
                 },
                 {
                     field: 'Gender', title: '性别', align: 'center',
-                    edit: {
-                        type: 'select',//下拉框，如果是下拉则需要设置type为select
-                        //url:'user/getUser.htm',//从服务器加载
-                        data: [{ id: 1, text: '男' }, { id: 0, text: '女' }],
-                        valueField: 'id',
-                        textField: 'text',
-                        onSelect: function (val, rec) {
-                            console.log(val, rec);
-                        }
-                    }
+                    // edit: {
+                    //     type: 'select',//下拉框，如果是下拉则需要设置type为select
+                    //     //url:'user/getUser.htm',//从服务器加载
+                    //     data: [{ id: 1, text: '男' }, { id: 0, text: '女' }],
+                    //     valueField: 'id',
+                    //     textField: 'text',
+                    //     onSelect: function(val, rec) {
+                    //         console.log(val, rec);
+                    //     }
+                    // }
+                    disabled:false,
+                    type:'select',
+                    placement:"right",
+                    placeholder:'性别',
+                    value:0,
+                    source:[
+                        {value:1,text:'男'},
+                        {value:0,text:'女'}
+                    ]
                 },
-                { field: 'BirthDay', title: '出生日期', align: 'center',width:180 },
+                { field: 'BirthDay', title: '出生日期', align: 'center', width: 180,
+                    edit:{
+                        type:'date'
+                    }    
+                },
                 { field: 'Age', title: '年龄', align: 'center' },
                 { field: 'Salary', title: '薪资', align: 'center' },
                 { field: 'Org', title: '所属组织Id', align: 'center' },
@@ -79,10 +94,5 @@ var index = {
                 }
             ]
         });
-    },
-    editRow: function (target) {
-        alert('edit');
-        // index.grid.bootstrapTable('editable', target);
-        index.grid.editable({ disabled: false });
     }
 };

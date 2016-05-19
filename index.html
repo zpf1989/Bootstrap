@@ -6,33 +6,40 @@
     <title>BootstrapTable学习</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-table/css/bootstrap-table.min.css">
-    <link href="x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <link href="x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
+    <link href="bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="bootstrap-table/js/bootstrap-table.min.js"></script>
     <script src="bootstrap-table/extensions/editable/bootstrap-table-editable.min.js"></script>
-    <script src="x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script src="x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js"></script>
+    <script src="bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <!--put your locale files after bootstrap-table.js-->
     <script src="bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 </head>
 
 <body>
-    <div class="container" style="margin:50px auto;">
-        <table id='grid' style="table-layout:fixed"></table>
+    <div>
+        <span>Username:</span>
+        <a href="#" id="username" data-type="text" data-placement="right" data-title="Enter username">superuser</a>
+    </div>
+    <div style="margin-bottom:40px;">
+        <input type="button" class="btn btn-primary" onclick="edit()" style="height:40px;" value="启用/禁用">
+    </div>
+    <div class="container table-responsive" style="margin:50px auto;">
+        <table id='grid' style=""></table>
     </div>
     <script src="index.js"></script>
     <script>
         $(function () {
             index.initGrid();
+            $('#username').editable();
         });
-        function edit(){
-            alert('a');
-            $('#grid').editable({disabled:false});
-        }
     </script>
-    <div style="margin-bottom:40px;">
-        <input type="button" class="btn btn-primary" onclick="edit()" style="height:40px;">
-    </div>
 </body>
 
 </html>

@@ -643,7 +643,6 @@ Editableform is linked with one of input types, e.g. 'text', 'select' etc.
 */
 (function ($) {
     "use strict";
-    
     //utils
     $.fn.editableutils = {
         /**
