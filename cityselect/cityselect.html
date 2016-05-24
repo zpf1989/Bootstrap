@@ -4,13 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../select2/select2.css">
-    <link rel="stylesheet" href="../select2/select2-metro.css">
-    <!--<link rel="stylesheet" href="../select2/select2-bootstrap.css">-->
-    <link rel="stylesheet" href="../select2-bootstrap-theme/dist/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-select/dist/css/bootstrap-select.min.css">
     <script src="../jquery.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-    <script src="../select2/select2.js"></script>
+    <script src="../bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="city.js"></script>
     <script>
         //加载select列表项
@@ -29,49 +26,72 @@
             $("#county").empty(); 
              $("#district").empty(); 
             var city=$('#city').val();
-            var county=$.grep(counties,function(item,index){
+            var _countites=$.grep(cityselector.counties,function(item,index){
                 return item.cityid==city;
             });
-            loadOptions('#county',county);
+            loadOptions('#county',_countites);
         }
-        //加载街道
+        //加载街道、社区
         function loadDistricts(){
-            //清空当前
-            $("#district").empty(); 
+            var districtHtml='';
             var county=$('#county').val();
-            var district=$.grep(districts,function(item,index){
+            var _districts=$.grep(cityselector.districts,function(item,index){
                 return item.countyid==county;
             });
-            loadOptions('#district',district);
+            $.each(_districts,function(index,value){
+                districtHtml+='<div id="'+value.id+'" class="district-container">';
+                districtHtml+='<div class="district"><a href="'+value.url+'">'+value.text+'</a></div>';
+                districtHtml+=getCommunitiesHtml(value.id);
+                districtHtml+='</div>';
+            });
+            $('#contentlist').html(districtHtml);
         }
-        //重新加载内嵌页面
-        function reloadIFrame(){
-            alert($('#district').val());
+        //加载社区
+        function getCommunitiesHtml(districtid){
+            var communityHtml= '<div class="community">';
+            var _communities=$.grep(cityselector.communities,function(item,index){
+                return item.districtid==districtid;
+            });
+            $.each(_communities,function(index,value){
+                communityHtml+='<a id="'+value.id+'" href="'+value.url+'">'+value.text+'</a>';
+            });
+            communityHtml+='</div>';
+            return communityHtml;
         }
-        //加载
+
+        //加载下拉框
         $(function(){
-            loadOptions('#city',cities);
+            loadOptions('#city',cityselector.cities);
             $('#city').val('jinan');
             loadCounties();
-            
-            $('#select2').select2({
-                // theme:'bootstrap'
-            });
         });
     </script>
+    <style>
+        #contentlist{
+            min-height: 400px;
+            margin-bottom: 80px;
+        }
+        .district-container{
+            min-height: 40px;
+            /*border: 1px solid red;*/
+            margin-top: 10px;
+        }
+        .district-container .district{
+            font-color:black;
+        }
+        .district-container .community{
+            margin-left: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container form-inline" style="margin-top:200px;">
-        <select class="form-control" id='city' style="width:100px;" onchange="loadCounties()"></select>
+    <div class="container form-inline" style="margin-top:100px;">
+        <select class="selectpicker" id='city' style="width:100px;" data-hide-disabled="true" data-live-search="false" onchange="loadCounties()"></select>
         <select class="form-control" id='county' style="width:100px;" onchange="loadDistricts()"></select>
-        <select class="form-control" id='district' style="width:140px;" onchange="reloadIFrame()"></select>
     </div>
-    <div class="container" style="margin-top:40px;">
-        <select name="select2" id="select2"  style="width:200px;" class="select2 select2-container" >
-            <option value="1">option1</option>
-            <option value="2">option2</option>
-        </select>
+    <div id='contentlist' class="container" style="margin-top:40px;">
+
     </div>
 </body>
 
