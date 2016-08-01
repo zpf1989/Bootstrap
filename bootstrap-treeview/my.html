@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bootstrap 树形菜单</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div style="margin:4px 0px;">
+        <button id='btncheckAll' type="button" class="btn btn-success">全选</button>
+        <button id='btnuncheckAll' type="button" class="btn btn-success">全不选</button>
+        <button id='btnexpandAll' type="button" class="btn btn-success">展开</button>
+        <button id='btncollapseAll' type="button" class="btn btn-success">折叠</button>
+        <button id='btnGetSelected' type="button" class="btn btn-success">获取选中节点</button>
+    </div>
+    <div id='tree'></div>
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap-treeview.js"></script>
+    <script src="js/treeviewExt.js"></script>
+    <script>
+        $(function(){
+            treeviewExt.initTree({
+                treeId:'tree',
+                dataId:'id',
+                dataUrl:'js/data.json'
+            });
+            
+            $('#btncheckAll').click(function(){treeviewExt.checkAll();});
+            $('#btnuncheckAll').click(function(){treeviewExt.uncheckAll();});
+            $('#btnexpandAll').click(function(){treeviewExt.expandAll();});
+            $('#btncollapseAll').click(function(){treeviewExt.collapseAll();});
+            $('#btnGetSelected').click(function(){
+                    var ids=treeviewExt.getCheckedDataIds();
+                    console.log(ids);
+                }
+            );
+        });
+    </script>
+</body>
+
+</html>
